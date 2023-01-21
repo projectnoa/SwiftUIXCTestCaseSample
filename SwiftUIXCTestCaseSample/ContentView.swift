@@ -9,12 +9,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = ViewModel()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            HStack {
+                TextField("",  text: $viewModel.input1)
+                    .padding()
+                    .border(.gray)
+                
+                Text("+")
+                
+                TextField("", text: $viewModel.input2)
+                    .padding()
+                    .border(.gray)
+                
+                Text("=")
+                
+                TextField("", text: $viewModel.output)
+                    .padding()
+                    .border(.gray)
+            }.padding()
+            
+            Button {
+                viewModel.calculate()
+            } label: {
+                Text("Calculate")
+            }.buttonStyle(.borderedProminent)
         }
         .padding()
     }
